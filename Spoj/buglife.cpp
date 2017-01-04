@@ -9,7 +9,7 @@ typedef list<int> G;
 bool bfs(vector<G> &graph,vector<bool> &visited,int start){
     int nodes=graph.size()-1;
     queue<int> myqueue;
-    char sex='f';
+    char sex;
     bool not_suspicious=true;
     vector<char> gender(nodes+1,'n');
     myqueue.push(start);
@@ -54,7 +54,6 @@ int main(){
         for(int i=1;i<=interaction;i++){
             int u,v;
             cin>>u>>v;
-            //cout<<u<<v<<endl;
             graph[u].push_back(v);
             graph[v].push_back(u);
         }
@@ -71,3 +70,4 @@ int main(){
             cout<<"Suspicious bugs found!\n";
     }     
 }
+
