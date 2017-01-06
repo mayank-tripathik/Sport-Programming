@@ -2,8 +2,6 @@
  * Problem : http://www.spoj.com/problems/NAKANJ/
  */
 
-
-
 #include<bits/stdc++.h>
 using namespace std;
 typedef pair<int,int> P;
@@ -45,7 +43,9 @@ P convert_string_into_cell_number(string str){
     
 }
 
-void bfs(int chess[9][9], string st, string des){
+void bfs(string st, string des)
+{
+    int chess[9][9];
     int moves=0;
     bool dest_found=false;
     P start=convert_string_into_cell_number(st);
@@ -59,7 +59,8 @@ void bfs(int chess[9][9], string st, string des){
     myqueue.push(start);
     visited[start.first][start.second]=true;
     parent[start.first][start.second]=start;
-    while(!myqueue.empty() && !dest_found){
+    while(!myqueue.empty() && !dest_found)
+    {
         P u=myqueue.front();
         myqueue.pop();
         vector<P> possible_moves;
@@ -83,10 +84,12 @@ void bfs(int chess[9][9], string st, string des){
     }
     P child;
     child=dest;
-    while(1){
+    while(1)
+    {
         if(child.first==start.first && child.second==start.second)
             break;
-        else{
+        else
+        {
             child=parent[child.first][child.second];
             moves++;
         }
@@ -100,11 +103,9 @@ int main(){
     int test;
     cin>>test;
     while(test--){
-        vector<P> poss;
-        int chess[9][9];
         string start,dest;
         cin>>start>>dest;
-        bfs(chess,start,dest);
+        bfs(start,dest);
     }
     
 }
