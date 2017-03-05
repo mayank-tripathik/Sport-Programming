@@ -1,3 +1,11 @@
+/*
+ * Problem: http://www.spoj.com/problems/BSHEEP/
+ * Simple application of convex hull
+ * calculate convex hull and then perimeter
+ */
+
+
+
 #include<bits/stdc++.h>
 #define PI 3.141592
 using namespace std;
