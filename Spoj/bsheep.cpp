@@ -1,6 +1,5 @@
 #include<bits/stdc++.h>
 #define PI 3.141592
-const double eps=1e-9;
 using namespace std;
 
 
@@ -28,7 +27,6 @@ void set_p0_as_min_point(vector<point> &points){
     }
     swap(points[0],points[min_point_index]);
     start=points[0];
-    //cout<<"start:"<<start.x<<" "<<start.y<<endl;
 }
 
 
@@ -89,16 +87,12 @@ void print(vector<point> points){
 stack<point> convex_hull(vector<point> &points){
     set_p0_as_min_point(points);
     sort(points.begin()+1,points.end(),compare);
-    //print(points);
     stack<point> mystack;
     int m = 1;
     for (int i=1; i<points.size(); i++)
     {
-        while (i < points.size()-1 && orientation(start, points[i], points[i+1]) == 0){
-            //cout<<"inside for i:"<<i<<" and i+1"<<i+1<<"Are coincident"<<endl;
+        while (i < points.size()-1 && orientation(start, points[i], points[i+1]) == 0)
             i++;
-        }
-        //cout<<"m:"<<m<<"<----"<<points[i].x<<","<<points[i].y<<" is inserted"<<endl;
         points[m] = points[i];
         m++;
     }   
@@ -120,27 +114,7 @@ stack<point> convex_hull(vector<point> &points){
     return mystack;
 }
 
-double signed_area(const vector<point> &poly){
-    int n=poly.size();
-    int S=0;
-    
-    for(int i=1;i<n;i++) S+=poly[i].x*(poly[i+1<n? i+1:i+1-n].y-poly[i-1].y);
-    S+=poly[0].x*(poly[1].y-poly[n-1].y);
-    
-    return S/2.0;
-}
-
-double area_for_three(vector<point> &points){
-    int n=points.size();
-    if(n==3)
-        return signed_area(points);
-    else if(n==2)
-        return (dist(points[0],points[1]))*2.0;
-    else
-        return 0.0;
-}
-
-double perim(vector<point> &points){
+double perimeter(vector<point> &points){
     double area=0.0;
     for(int i=0;i<points.size();i++){
         int j=(i+1)%points.size();
@@ -153,7 +127,6 @@ int main() {
     int test;
     cin>>test;
     for(int i=1;i<=test;i++){
-        //cout<<"Case #"<<i<<endl;
         double area;
         vector<point> hulls;
         int n;
@@ -167,15 +140,13 @@ int main() {
             points[k].index=k+1;
         }
         stack<point> S=convex_hull(points);
-        //cout<<"Points in Convex hull:"<<endl;
         while(!S.empty())
         {
             point p=S.top();
             S.pop();
             hulls.push_back(p);
-            //cout<<p.x<<" "<<p.y<<endl<<" "<<p.index<<endl;
         }
-        area=perim(hulls);  
+        area=perimeter(hulls);  
         cout << fixed;
         cout << setprecision(2);
         cout<<area<<endl;
